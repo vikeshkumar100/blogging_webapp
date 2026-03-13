@@ -4,6 +4,9 @@ import path from 'path';
 import expressEjsLayouts from 'express-ejs-layouts';
 import { connectToDB } from './connection.js';
 import authRouter from './routes/auth.route.js';
+import { verifyLogin } from './middlewares/auth.middleware.js';
+import cookieParser from 'cookie-parser';
+
 
 dotenv.config();
 
@@ -18,8 +21,9 @@ app.use(expressEjsLayouts);
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.set("layout","layout");
+app.use(cookieParser());
 
-app.get('/',(req,res)=>{
+app.get('/',verifyLogin,(req,res)=>{
     return res.render("home",{title:"home"});
 })
 app.use('/auth',authRouter);

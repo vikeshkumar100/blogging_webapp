@@ -40,5 +40,9 @@ export const handleLogin=async (req,res)=>{
     }catch(err){
         return res.status(500).json({msg:"server error"});
     }
+}
 
+export const handleLogout=(req,res)=>{
+    res.clearCookie("jwt");
+    return res.redirect("/auth/login");
 }
