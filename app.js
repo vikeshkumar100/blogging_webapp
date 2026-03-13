@@ -20,7 +20,7 @@ app.use(express.urlencoded({extended:true}));
 app.set("layout","layout");
 
 app.get('/',(req,res)=>{
-    res.send("Hi, this is blogging app");
+    return res.render("home",{title:"home"});
 })
 app.use('/auth',authRouter);
 
